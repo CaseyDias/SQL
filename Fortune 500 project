@@ -72,7 +72,6 @@ ORDER BY paid_time_off_days desc,maternity_leave_weeks desc;
 
 -- based on avg employee tenure, assume job satisfaction, order desc
 
--- based on avg employee tenure, assume job satisfaction
 
 SELECT 
   company_name, 
@@ -91,33 +90,30 @@ ORDER BY avg_employee_tenure desc
 SELECT company_name, revenue, employees,
 ROUND ((revenue/employees)*100,2) AS "Employee_Based_Revenue"
 FROM fortune_companies
-ORDER BY Employee_Based_Revenue desc, employees desc;
+ORDER BY revenue desc;
 
 
 --number of employees receiving healthcare benefits working in the tech industry that also has an average employee tenure higher than 5
 
 
-
 SELECT 
-  industry,
-  SUM(employees) AS total_employees_receiving_healthcare, 
-  healthcare_benefits, 
-  ROUND(AVG(avg_employee_tenure), 1) AS rounded_tenure 
+  industry,company_name,
+  SUM(employees) AS total_employees_receiving_healthcare,  
+  ROUND(AVG(avg_employee_tenure), 1) AS length_at_job 
 FROM fortune_companies
 WHERE industry = 'Technology'
   AND healthcare_benefits = 1
 GROUP BY industry, healthcare_benefits
 HAVING AVG(avg_employee_tenure) >= 5
-ORDER BY rounded_tenure DESC;
+ORDER BY length_at_job DESC
 
 
 -- which industry is making the most revenue?
 
-SELECT industry, SUM(revenue) AS total_revenue_per_industry,
-ROUND(SUM(revenue),3) AS rounded_revenue
+SELECT industry,
+ROUND(SUM(revenue),3) AS total_revenue
 FROM fortune_companies
 GROUP BY industry
-ORDER BY rounded_revenue desc;
-
+ORDER BY total_revenue desc;
 
 
