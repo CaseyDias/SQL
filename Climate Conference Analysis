@@ -135,7 +135,7 @@ ORDER BY hotel_name;
 
 
 
--- what are the event types and who is going to what event- staying at which hotel and where dinner is rsvp
+-- what are the event names and who is going to what event- staying at which hotel and where dinner is rsvp
 
 SELECT events.event_name, vips.last_name, hotels.hotel_name
 FROM events
