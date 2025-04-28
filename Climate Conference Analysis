@@ -135,15 +135,15 @@ ORDER BY hotel_name;
 
 
 
--- what are the event names and who is going to what event- staying at which hotel and where dinner is rsvp
+-- what are the event names and who is going to what event- staying at which hotel and where dinner is rsvp, order by hotel name
 
 SELECT events.event_name, vips.last_name, hotels.hotel_name
 FROM events
 INNER JOIN vips ON events.event_id = vips.event
 INNER JOIN reservations ON vips.member_id = reservations.member_id
 INNER JOIN hotels ON reservations.hotel = hotels.hotel_id
-WHERE reservations.dinner_rsvp = 1;
-
+WHERE reservations.dinner_rsvp = 1
+ORDER BY hotels.hotel_name;
 
 
 
