@@ -135,6 +135,21 @@ ORDER BY hotel_name;
 
 
 
+-- what are the event types and who is going to what event- staying at which hotel and where dinner is rsvp
+
+SELECT events.event_name, vips.last_name, hotels.hotel_name
+FROM events
+LEFT JOIN vips
+ON events.event_id=vips.event 
+INNER JOIN reservations
+ON reservations.member_id=vips.member_id
+INNER JOIN hotels
+ON hotels.hotel_id= reservations.hotel
+WHERE dinner_rsvp=1;
+
+
+
+
 
 
 
