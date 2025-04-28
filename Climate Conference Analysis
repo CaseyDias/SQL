@@ -139,14 +139,10 @@ ORDER BY hotel_name;
 
 SELECT events.event_name, vips.last_name, hotels.hotel_name
 FROM events
-LEFT JOIN vips
-ON events.event_id=vips.event 
-INNER JOIN reservations
-ON reservations.member_id=vips.member_id
-INNER JOIN hotels
-ON hotels.hotel_id= reservations.hotel
-WHERE dinner_rsvp=1;
-
+INNER JOIN vips ON events.event_id = vips.event
+INNER JOIN reservations ON vips.member_id = reservations.member_id
+INNER JOIN hotels ON reservations.hotel = hotels.hotel_id
+WHERE reservations.dinner_rsvp = 1;
 
 
 
