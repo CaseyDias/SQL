@@ -146,6 +146,58 @@ WHERE reservations.dinner_rsvp = 1
 ORDER BY hotels.hotel_name;
 
 
+--List all VIPs' full names and the names of the hotels they are staying at , show those with reservations and without
+
+SELECT vips.first_name,vips.last_name, hotels.hotel_name
+FROM vips
+LEFT JOIN reservations
+ON vips.member_id=reservations.member_id
+LEFT JOIN hotels
+ON reservations.hotel= hotels.hotel_id
+ORDER BY vips.last_name;
+
+
+
+--List the last names of VIPs and the last names of the VIPs they are assigned to provide feedback to.
+
+
+
+SELECT 
+  Giver.last_name AS Giver_Name,
+  Receiver.last_name AS Receiver_Name
+FROM vips AS Giver
+JOIN vips AS Receiver
+  ON Giver.provides_feedback_to = Receiver.member_id;
+
+
+--Find the last names of VIPs who are staying at the same hotel as 'Gonzalez'.
+
+    
+    SELECT vips.last_name, hotels.hotel_name
+FROM vips
+INNER JOIN reservations
+  ON vips.member_id = reservations.member_id
+INNER JOIN hotels
+  ON reservations.hotel = hotels.hotel_id
+WHERE reservations.hotel IN (
+    SELECT reservations.hotel
+    FROM vips
+    INNER JOIN reservations
+      ON vips.member_id = reservations.member_id
+    WHERE vips.last_name = 'Gonzalez'
+);
+
+
+
+--List the last names of VIPs and the names of the events they’re attending, but only for events that are workshops.
+  
+  SELECT vips.last_name, events.event_name, events.event_type
+  FROM vips
+  INNER JOIN events
+  ON vips.event=events.event_id
+  WHERE events.event_type ='Workshop';
+
+
 
 
 
